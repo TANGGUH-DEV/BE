@@ -26,7 +26,6 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
-
 firebase_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
 
 if firebase_json:
@@ -34,8 +33,9 @@ if firebase_json:
         json.loads(firebase_json)
     )
 else:
-    raise Exception("FIREBASE_SERVICE_ACCOUNT not found in environment variables")
+    raise Exception("FIREBASE_SERVICE_ACCOUNT environment variable not found")
 
+    
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
