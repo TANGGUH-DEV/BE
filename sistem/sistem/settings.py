@@ -15,7 +15,8 @@ import environ
 import os
 from dotenv import load_dotenv
 from logging.handlers import RotatingFileHandler
-
+from google.oauth2 import service_account
+import json
 
 load_dotenv()
 
@@ -25,6 +26,11 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
+SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, "serviceAccountKey.json")
+
+firebase_credentials = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
