@@ -2,11 +2,19 @@
 from rest_framework import authentication, exceptions
 import firebase_admin
 from firebase_admin import auth as firebase_auth, credentials
+import os
+import json
 
-cred_path = r"D:\portfolio\backend\sistem\serviceAccountKey.json"
-cred = credentials.Certificate(cred_path)
-if not firebase_admin._apps:
-    firebase_admin.initialize_app(cred)
+firebase_json = os.environ.get("FIREBASE_CREDENTIALS")
+
+if firebase_json:
+    cred_dict = json.loads(firebase_json)
+    cred = credentials.Certificate(cred_dict)
+
+    if not firebase_admin._apps:
+        firebase_admin.initialize_app(cred)
+else:
+    raise Exception("FIREBASE_CREDENTIALS not set in environment variables")
 
 class FirebaseAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
