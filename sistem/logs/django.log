@@ -1,0 +1,24 @@
+[2025-11-29 17:17:50,225] INFO django.utils.autoreload Watching for file changes with StatReloader
+[2025-11-29 17:17:55,565] INFO django.utils.autoreload D:\portfolio\backend\sistem\sistem\settings.py changed, reloading.
+[2025-11-29 17:17:56,523] INFO django.utils.autoreload Watching for file changes with StatReloader
+[2025-11-29 17:18:49,576] INFO django.server "GET /api/v1/media/public-media HTTP/1.1" 301 0
+[2025-11-29 17:18:50,904] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:18:51,249] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:19:52,930] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:19:57,071] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+    [2025-11-29 17:21:09,641] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:21:09,829] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:22:15,777] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:22:15,934] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:31:28,904] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:31:29,108] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:36:05,776] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:36:06,004] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:37:15,695] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:37:15,950] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:39:29,720] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:39:29,757] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:41:16,283] INFO django.server "GET /api/v1/berita/berita/ HTTP/1.1" 200 3851
+[2025-11-29 17:41:16,376] INFO django.server "GET /api/v1/media/public-media/ HTTP/1.1" 200 2112
+[2025-11-29 17:41:27,752] INFO django.server "GET /api/v1/berita/berita/testing-e2da82b2 HTTP/1.1" 301 0
+[2025-11-29 17:41:29,037] INFO django.server "GET /api/v1/berita/berita/testing-e2da82b2/ HTTP/1.1" 200 429

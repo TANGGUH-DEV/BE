@@ -1,1 +1,21 @@
+# .gitignore di D:\portfolio\backend
+
+# Virtual environment
+env/
+venv/
+cache/
+.env
+logs/*.log
+env/*.env
+# File credentials rahasia
+serviceAccountKey.json
+
+# Python cache
+__pycache__/
+*.pyc
 sistem/serviceAccountKey.json
+
+sistem/.env
+
+
+.env
