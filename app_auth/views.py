@@ -14,11 +14,20 @@ from rest_framework.response import Response
 from app_user.serializers import UserProfileSerializer
 from app_user.models import UserProfile
 
-cred_path = r"D:\portfolio\backend\sistem\serviceAccountKey.json"
-cred = credentials.Certificate(cred_path)
+import os
+
+import json
+
+cred_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT")
+
+if not cred_json:
+    raise Exception("FIREBASE_SERVICE_ACCOUNT not set in environment variables")
+
+cred_dict = json.loads(cred_json)
+cred = credentials.Certificate(cred_dict)
+
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
-print("Firebase apps:", firebase_admin._apps)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class VerifyFirebaseTokenView(APIView):
