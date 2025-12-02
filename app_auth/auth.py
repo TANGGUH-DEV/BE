@@ -5,7 +5,7 @@ from firebase_admin import auth as firebase_auth, credentials
 import os
 import json
 
-firebase_json = os.environ.get("FIREBASE_CREDENTIALS")
+firebase_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT")
 
 if firebase_json:
     cred_dict = json.loads(firebase_json)
@@ -14,7 +14,7 @@ if firebase_json:
     if not firebase_admin._apps:
         firebase_admin.initialize_app(cred)
 else:
-    raise Exception("FIREBASE_CREDENTIALS not set in environment variables")
+    raise Exception("FIREBASE_SERVICE_ACCOUNT not set in environment variables")
 
 class FirebaseAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
