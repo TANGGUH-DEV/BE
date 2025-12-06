@@ -29,7 +29,6 @@ class MediaViewSet(viewsets.ModelViewSet):
     serializer_class = MediaSerializer
     authentication_classes = [FirebaseAuthentication]
     permission_classes = [permissions.IsAuthenticated]
-    lookup_field = "slug"
 
     def get_queryset(self):
         """
@@ -75,7 +74,7 @@ class MediaViewSet(viewsets.ModelViewSet):
         Soft delete: tandai media sebagai dihapus tanpa menghapus dari database.
         """
         instance = self.get_object()
-        if instance.author.uid != request.user.uid:
+        if instance.author != request.user:
             return Response({"detail: tidak punya akses"}, status=403)
         instance.is_delete = True
         instance.save()
