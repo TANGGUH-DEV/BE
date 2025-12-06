@@ -30,19 +30,12 @@ class MediaViewSet(viewsets.ModelViewSet):
     authentication_classes = [FirebaseAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
-    lookup_field = "slug"          # <- pakai slug
-    lookup_url_kwarg = "slug"
-
     def get_queryset(self):
         """
         Menampilkan hanya media milik user yang sedang login.
         """
-        user = self.request.user
-
-        if self.request.method == "GET" and not self.kwargs.get("slug"):
-            return News.objects.filter(author__uid=user.username, is_delete=False)
-
-        return News.objects.all()
+        user = self.request.user    # Selalu filter berdasarkan user
+        return News.objects.filter(author__uid=user.username)
 
     def create(self, request, *args, **kwargs):
         """
