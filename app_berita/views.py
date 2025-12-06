@@ -25,17 +25,17 @@ from app_user.models import UserProfile
 logger = logging.getLogger(__name__)
 
 class MediaViewSet(viewsets.ModelViewSet):
-    queryset = News.objects.all()
     serializer_class = MediaSerializer
     authentication_classes = [FirebaseAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    lookup_field = "slug"
 
     def get_queryset(self):
         """
         Menampilkan hanya media milik user yang sedang login.
         """
         user = self.request.user    # Selalu filter berdasarkan user
-        return News.objects.filter(author__uid=user.username)
+        return News.objects.filter(author__uid=user.uid, is_delete=False)
 
     def create(self, request, *args, **kwargs):
         """
@@ -61,7 +61,7 @@ class MediaViewSet(viewsets.ModelViewSet):
         """
         user = self.request.user
         try:
-            user_profile_instance = UserProfile.objects.get(uid=user.username)
+            user_profile_instance = UserProfile.objects.get(uid=user.uid)
             serializer.save(author=user_profile_instance)
             logger.info(f"✅ Media berhasil disimpan untuk user: {user.username}")
         except Exception as e:
@@ -74,6 +74,8 @@ class MediaViewSet(viewsets.ModelViewSet):
         Soft delete: tandai media sebagai dihapus tanpa menghapus dari database.
         """
         instance = self.get_object()
+        if instance.author.uid != request.user.uid:
+            return Response({"detail: tidak punya akses"}, status=403)
         instance.is_delete = True
         instance.save()
         logger.info(f"Media id={instance.id} ditandai sebagai dihapus oleh user {request.user.username}")
