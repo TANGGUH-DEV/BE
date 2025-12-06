@@ -39,7 +39,7 @@ class MediaViewSet(viewsets.ModelViewSet):
         """
         user = self.request.user
 
-        if self.action == "list":
+        if self.request.method == "GET" and not self.kwargs.get("slug"):
             return News.objects.filter(author__uid=user.username, is_delete=False)
 
         return News.objects.filter(author__uid=user.username)
