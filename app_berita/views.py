@@ -74,8 +74,17 @@ class MediaViewSet(viewsets.ModelViewSet):
         Soft delete: tandai media sebagai dihapus tanpa menghapus dari database.
         """
         instance = self.get_object()
-        if instance.author != request.user:
-            return Response({"detail: tidak punya akses"}, status=403)
+
+    # Ambil UserProfile yang sesuai dengan Firebase user
+        try:
+            user_profile = UserProfile.objects.get(uid=request.user.username)
+        except UserProfile.DoesNotExist:
+            return Response({"detail": "User profile tidak ditemukan"}, status=404)
+
+        # Cek ownership
+        if instance.author != user_profile:
+            return Response({"detail": "Tidak punya akses"}, status=403)
+        
         instance.is_delete = True
         instance.save()
         logger.info(f"Media id={instance.id} ditandai sebagai dihapus oleh user {request.user.username}")
