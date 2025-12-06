@@ -25,6 +25,7 @@ from app_user.models import UserProfile
 logger = logging.getLogger(__name__)
 
 class MediaViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.all()
     serializer_class = MediaSerializer
     authentication_classes = [FirebaseAuthentication]
     permission_classes = [permissions.IsAuthenticated]
@@ -35,7 +36,7 @@ class MediaViewSet(viewsets.ModelViewSet):
         Menampilkan hanya media milik user yang sedang login.
         """
         user = self.request.user    # Selalu filter berdasarkan user
-        return News.objects.filter(author__uid=user.uid, is_delete=False)
+        return News.objects.filter(author__uid=user.username, is_delete=False)
 
     def create(self, request, *args, **kwargs):
         """
@@ -61,7 +62,7 @@ class MediaViewSet(viewsets.ModelViewSet):
         """
         user = self.request.user
         try:
-            user_profile_instance = UserProfile.objects.get(uid=user.uid)
+            user_profile_instance = UserProfile.objects.get(uid=user.username)
             serializer.save(author=user_profile_instance)
             logger.info(f"✅ Media berhasil disimpan untuk user: {user.username}")
         except Exception as e:
