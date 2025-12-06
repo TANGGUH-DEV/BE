@@ -35,7 +35,11 @@ class MediaViewSet(viewsets.ModelViewSet):
         Menampilkan hanya media milik user yang sedang login.
         """
         user = self.request.user
-        return News.objects.filter(author__uid=user.username, is_delete=False)
+
+        if self.action == "list":
+            return  News.objects.filter(author__uid=user.username, is_delete=False)
+    
+        return News.objects.filter(author__uid=user.username)
 
     def create(self, request, *args, **kwargs):
         """
